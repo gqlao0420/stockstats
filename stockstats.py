@@ -57,7 +57,7 @@ _dft_windows = {
     'coppock': (10, 11, 14), # Coppock Curve 估波指标
     'cr': 26, # Energy Index (Intermediate Willingness Index) 追踪能源类股票表现的指标
     'cti': 12, # Correlation Trend Indicator 相关性趋势指标
-    'dma': (10, 50), # Difference of Moving Average 移动平均线的不同
+    'dma': (10, 50), # Different of Moving Average 移动平均线的不同
     'eri': 13, # Elder-Ray Index 艾尔德能量指标
     'eribear': 13, # 艾尔德能量 弱势 指标 bear power
     'eribull': 13, # 艾尔德能量 强势 指标 bull power
@@ -2034,4 +2034,5 @@ def _lower_col_name(name):
     if name.lower() != name and name.lower() in candidates:
         return name.lower()
     return name
+
 
