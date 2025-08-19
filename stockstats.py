@@ -46,6 +46,8 @@ class StockStatsError(Exception):
 
 _dft_windows = {
     # sort alphabetically
+    # 字典变量，键值：key-value
+    
     'ao': (5, 34), # Awesome Oscillator 动量振荡指标
     'aroon': 25, # Aroon Oscillator 阿隆振荡指标
     'atr': 14, # Average True Range 平均真实波幅(波动区间)
@@ -95,13 +97,15 @@ _dft_windows = {
 
 
 def set_dft_window(name: str, windows: Union[int, tuple[int, ...]]):
-    ret = _dft_windows.get(name)
-    _dft_windows[name] = windows
+    ret = _dft_windows.get(name) # 获取key对应的老value
+    _dft_windows[name] = windows # 对key设置新的value
     return ret
 
 
 _dft_column = {
     # sort alphabetically
+    # 这些指标都是以收盘价close作为计算依据
+    
     'cti': 'close',
     'dma': 'close',
     'kama': 'close',
@@ -141,6 +145,8 @@ class _Meta:
 
     @staticmethod
     def _process_segment(windows):
+        # windows: 一个字符串，表示时间窗口。可以是单一数字（如 "5"）或一个范围（如 "3~7"）
+        # 功能是处理一个表示时间窗口范围的字符串，并将其转换为一个整数列表。
         if '~' in windows:
             start, end = windows.split('~')
             shifts = range(int(start), int(end) + 1)
@@ -150,8 +156,9 @@ class _Meta:
 
     @property
     def ints(self) -> list[int]:
-        items = map(self._process_segment, self.windows.split(','))
-        return list(itertools.chain(*items))
+        # 功能是将一个复杂的窗口配置字符串解析并展开为一个平坦的整数列表，返回类型注解 -> list[int]
+        items = map(self._process_segment, self.windows.split(',')) # 先分割字符串: self.windows.split(',')；再映射处理: map(self._process_segment, ...) - 对每个部分应用 _process_segment 方法
+        return list(itertools.chain(*items)) # itertools.chain(*items): 将嵌套的列表展开成一个平坦的迭代器；list(...): 将迭代器转换为列表
 
     @property
     def int(self) -> int:
@@ -161,11 +168,12 @@ class _Meta:
         return numbers[0]
 
     def _get_int(self, i):
+        # 目的是提取 self.ints 列表中的第 i 个数值
         numbers = self.ints
         if len(numbers) < i + 1:
             # try the defaults
             dft_numbers = _dft_windows[self._name]
-            if len(dft_numbers) > i:
+            if len(dft_numbers) > i: # 检查长度是否大于索引序数
                 return dft_numbers[i]
             raise StockStatsError(f'not enough ints, need {i + 1}')
         return self.ints[i]
@@ -201,6 +209,7 @@ class _Meta:
             return self._dft_column
         return self._column
 
+    # 设置规范化的技术指标名称
     @property
     def name(self):
         if self._windows is None and self._column is None:
@@ -219,7 +228,7 @@ class _Meta:
             return ret
         return f'{ret}_{self.windows}'
 
-
+#==============================================
 def _call_handler(handler: Callable):
     meta = _Meta(handler.__name__[5:])
     return handler(meta)
@@ -239,7 +248,7 @@ def unwrap(sdf):
     """ convert a StockDataFrame back to a pandas DataFrame """
     return pd.DataFrame(sdf)
 
-
+#==============================================
 class StockDataFrame(pd.DataFrame):
     # Start of options.
     KDJ_PARAM = (2.0 / 3.0, 1.0 / 3.0)
@@ -2034,5 +2043,6 @@ def _lower_col_name(name):
     if name.lower() != name and name.lower() in candidates:
         return name.lower()
     return name
+
 
 
