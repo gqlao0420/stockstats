@@ -1,3 +1,4 @@
+# 方便解读，Pypl上的链接：https://pypi.org/project/stockstats/#description
 # coding=utf-8
 # Copyright (c) 2016, Cedric Zhuang
 # All rights reserved.
@@ -45,49 +46,50 @@ class StockStatsError(Exception):
 
 _dft_windows = {
     # sort alphabetically
-    'ao': (5, 34),
-    'aroon': 25,
-    'atr': 14,
+    'ao': (5, 34), # Awesome Oscillator 动量振荡指标
+    'aroon': 25, # Aroon Oscillator 阿隆振荡指标
+    'atr': 14, # Average True Range 平均真实波幅(波动区间)
     'boll': 20,
-    'cci': 14,
+    'cci': 14, # Commodity Channel Index 商品通道指标 或 顺势指标
     'change': 1,
-    'chop': 14,
-    'cmo': 14,
-    'coppock': (10, 11, 14),
-    'cr': 26,
-    'cti': 12,
-    'dma': (10, 50),
-    'eri': 13,
-    'eribear': 13,
-    'eribull': 13,
-    'ichimoku': (9, 26, 52),
-    'inertia': (20, 14),
-    'ftr': 9,
-    'kama': (10, 5, 34),  # window, fast, slow
+    'chop': 14,  # Choppiness Index 波动指标
+    'cmo': 14, # Chande Momentum Oscillator 钱徳动量振荡指标
+    'coppock': (10, 11, 14), # Coppock Curve 估波指标
+    'cr': 26, # Energy Index (Intermediate Willingness Index) 追踪能源类股票表现的指标
+    'cti': 12, # Correlation Trend Indicator 相关性趋势指标
+    'dma': (10, 50), # Difference of Moving Average 移动平均线的不同
+    'eri': 13, # Elder-Ray Index 艾尔德能量指标
+    'eribear': 13, # 艾尔德能量 弱势 指标 bear power
+    'eribull': 13, # 艾尔德能量 强势 指标 bull power
+    'ichimoku': (9, 26, 52), # Ichimoku Cloud 一目均表
+    'inertia': (20, 14), # Inertia Indicator 惯性指标
+    'ftr': 9, # the Gaussian Fisher Transform Price Reversals indicator 高斯-费雪变换价格反转指标
+    'kama': (10, 5, 34),  # window, fast, slow  # Kaufman's Adaptive Moving Average 考夫曼自适应移动平均线
+    # KDJ - 随机振荡指标
     'kdjd': 9,
     'kdjj': 9,
     'kdjk': 9,
-    'ker': 10,
-    'macd': (12, 26, 9),  # short, long, signal
-    'mfi': 14,
-    'ndi': 14,
-    'pdi': 14,
-    'pgo': 14,
-    'ppo': (12, 26, 9),  # short, long, signal
-    'pvo': (12, 26, 9),  # short, long, signal
-    'psl': 12,
-    'qqe': (14, 5),  # rsi, rsi ema
-    'rsi': 14,
-    'rsv': 9,
-    'rvgi': 14,
-    'stochrsi': 14,
-    'supertrend': 14,
-    'tema': 5,
-    'trix': 12,
-    'wr': 14,
-    'wt': (10, 21),
-    'vr': 26,
-    'vwma': 14,
+    'ker': 10, # Kaufman's efficiency ratio  Kaufman效率比率
+    'macd': (12, 26, 9),  # short, long, signal  # Moving Average Convergence Divergence 平滑移动平均线指标
+    'mfi': 14, # Money Flow Index 资金流指标
+    'ndi': 14, # the negative directional movement line (-DI)
+    'pdi': 14, # the positive directional movement line (+DI)
+    'pgo': 14, # Pretty Good Oscillator 市场优良振荡指标
+    'ppo': (12, 26, 9),  # short, long, signal  # Percentage Price Oscillator 价格振比指标，用于衡量两条移动平均线之间的百分比差异，以评估价格动能和趋势。
+    'pvo': (12, 26, 9),  # short, long, signal  # Percentage Volume Oscillator 成交量振比指标
+    'psl': 12, # Psychological Line 股市中的心理线（Psychological Line）是一种人气指标，用于衡量市场投资者的情绪，并以此来判断股市是否处于超买或超卖状态。
+    'qqe': (14, 5),  # rsi, rsi ema # Quantitative Qualitative Estimation 定量定性评估
+    'rsi': 14, # Relative Strength Index 相对强度指标
+    'rsv': 9, # Raw Stochastic Value 未成熟随机值
+    'rvgi': 14, # Relative Vigor Index 股市的相对能量指数
+    'stochrsi': 14, # Stochastic RSI 随机相对强度指标
+    'supertrend': 14, # with the Upper Band and Lower Band
+    'tema': 5, # Another Triple Exponential Moving Average 另一个三重指数移动平均
+    'trix': 12, # Triple Exponential Moving Average 三重指数移动平均
+    'wr': 14, # Williams Overbought/Oversold index 威廉超买超卖指标
+    'wt': (10, 21), #  LazyBear's Wave Trend
+    'vr': 26, # Volume Variation Index 成交量变动指标
+    'vwma': 14, # Volume Weighted Moving Average 股市成交加权平均价格 交易量比重均值
     'num': 0,
 }
 
@@ -2032,3 +2034,4 @@ def _lower_col_name(name):
     if name.lower() != name and name.lower() in candidates:
         return name.lower()
     return name
+
