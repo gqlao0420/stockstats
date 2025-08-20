@@ -270,13 +270,17 @@ class StockDataFrame(pd.DataFrame):
 
     # End of options
 
+    #***********************************SD 01***********************************#
     @staticmethod
     def _df_to_series(column):
         # if column is data frame, retrieve the first column
+        # 根据 column，从 data frame 中提取该 column 列下，所有行的数据！！！
         if isinstance(column, pd.DataFrame):
-            column = column.iloc[:, 0]
+            column = column.iloc[:, 0] # iloc - index location 的缩写。 [:, 0] - : 选择所有行，0 : 选择第一列，合并在一起就是“选择所有行的第一列”。默认第一列是 date 数据
         return column
-
+        
+    # 下面6个函数，是根据 data frame 的 column 名字，提取对应 column 列下所有行数据。而 column 原本就存在于 data frame 中。
+    # 根据 @property 装饰器的特点，实例可以像访问属性一样，直接访问它们。
     @property
     def high(self) -> pd.Series:
         return self._df_to_series(self['high'])
@@ -300,7 +304,8 @@ class StockDataFrame(pd.DataFrame):
     @property
     def amount(self) -> pd.Series:
         return self._df_to_series(self['amount'])
-
+    #***********************************SD 01 END***********************************#
+    
     def _get_change(self, meta: _Meta):
         """ Get the percentage change column
 
@@ -2048,6 +2053,7 @@ def _lower_col_name(name):
     if name.lower() != name and name.lower() in candidates:
         return name.lower()
     return name
+
 
 
 
