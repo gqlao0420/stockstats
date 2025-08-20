@@ -230,7 +230,7 @@ class _Meta:
 
 #==============================================
 def _call_handler(handler: Callable):
-    meta = _Meta(handler.__name__[5:])
+    meta = _Meta(handler.__name__[5:]) # handler.__name__：获取处理器函数的名称，创建 _Meta 实例
     return handler(meta)
 
 
@@ -2043,6 +2043,7 @@ def _lower_col_name(name):
     if name.lower() != name and name.lower() in candidates:
         return name.lower()
     return name
+
 
 
 
