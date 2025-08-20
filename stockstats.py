@@ -230,12 +230,15 @@ class _Meta:
 
 #==============================================
 def _call_handler(handler: Callable):
-    meta = _Meta(handler.__name__[5:]) # handler.__name__：获取处理器函数的名称，创建 _Meta 实例
+    # handler.__name__：获取处理器函数的名称，创建 _Meta 实例
+    # handler 的名字肯定是按照某种规则明明，去掉前5个字符后，正好符合 _Meta 类实例的输入要求
+    meta = _Meta(handler.__name__[5:])
     return handler(meta)
 
 
 def wrap(df, index_column=None):
     """ wraps a pandas DataFrame to StockDataFrame
+    将普通的 DataFrame 转换成 StockDataFrame
 
     :param df: pandas DataFrame
     :param index_column: the name of the index column, default to ``date``
@@ -245,7 +248,9 @@ def wrap(df, index_column=None):
 
 
 def unwrap(sdf):
-    """ convert a StockDataFrame back to a pandas DataFrame """
+    """ convert a StockDataFrame back to a pandas DataFrame 
+    将普通的 StockDataFrame 逆转换成 DataFrame
+    """
     return pd.DataFrame(sdf)
 
 #==============================================
@@ -2043,6 +2048,7 @@ def _lower_col_name(name):
     if name.lower() != name and name.lower() in candidates:
         return name.lower()
     return name
+
 
 
 
